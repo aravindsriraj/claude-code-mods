@@ -1,0 +1,10 @@
+{
+  "name": "design-picker",
+  "version": "0.1.0",
+  "description": "Draws design-direction questions from AskUserQuestion as visual mockups to pick from; other questions untouched.",
+  "author": {
+    "name": "TR Aravindan",
+    "url": "https://github.com/aravindsriraj"
+  },
+  "types": "./types/index.d.ts"
+}

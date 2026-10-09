@@ -1,0 +1,20 @@
+{
+  "name": "claude-code-mods",
+  "description": "Claude Code mods: a prompt enhancer and a visual design-direction picker.",
+  "owner": {
+    "name": "TR Aravindan",
+    "url": "https://github.com/aravindsriraj"
+  },
+  "plugins": [
+    {
+      "name": "prompt-enhancer",
+      "source": "./prompt-enhancer",
+      "description": "Rewrites a vague draft in the prompt box using the project's instructions, skills and conversation; Send submits it."
+    },
+    {
+      "name": "design-picker",
+      "source": "./design-picker",
+      "description": "Draws design-direction questions from AskUserQuestion as visual mockups to pick from; other questions untouched."
+    }
+  ]
+}
