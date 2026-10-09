@@ -1,0 +1,10 @@
+{
+  "name": "idea-shelf",
+  "version": "0.1.0",
+  "description": "Park side-ideas mid-task with /idea, without Claude seeing them; list them with /ideas and send one later as a prompt.",
+  "author": {
+    "name": "TR Aravindan",
+    "url": "https://github.com/aravindsriraj"
+  },
+  "types": "./types/index.d.ts"
+}

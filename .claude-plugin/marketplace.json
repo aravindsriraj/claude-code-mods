@@ -1,6 +1,6 @@
 {
   "name": "claude-code-mods",
-  "description": "Claude Code mods: a prompt enhancer, a visual design-direction picker, and an assumption tracker.",
+  "description": "Claude Code mods: a prompt enhancer, a visual design-direction picker, an assumption tracker, and an idea shelf.",
   "owner": {
     "name": "TR Aravindan",
     "url": "https://github.com/aravindsriraj"
@@ -20,6 +20,11 @@
       "name": "assumption-tracker",
       "source": "./assumption-tracker",
       "description": "Claude records each assumption it makes; review them in a side pane, mark them right or wrong, and the verdicts go back to Claude."
+    },
+    {
+      "name": "idea-shelf",
+      "source": "./idea-shelf",
+      "description": "Park side-ideas mid-task with /idea, without Claude seeing them; list them with /ideas and send one later as a prompt."
     }
   ]
 }

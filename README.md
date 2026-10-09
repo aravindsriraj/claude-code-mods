@@ -1,10 +1,11 @@
 # claude-code-mods
 
-Three mods for [Claude Code](https://claude.com/claude-code):
+Four mods for [Claude Code](https://claude.com/claude-code):
 
 - **prompt-enhancer** turns a rough prompt into a specific one, using what Claude already knows about your project, before you send it.
 - **design-picker** shows design-direction questions as visual mockups you pick from, instead of a plain list.
 - **assumption-tracker** has Claude write down each assumption it makes while it works, so you can mark them right or wrong and send corrections back.
+- **idea-shelf** parks side-ideas mid-task without Claude seeing them, and sends any of them later as a prompt.
 
 ## Install
 
@@ -14,6 +15,7 @@ Type these at the prompt of a Claude Code session in a terminal:
 /plugin install prompt-enhancer --marketplace aravindsriraj/claude-code-mods
 /plugin install design-picker --marketplace aravindsriraj/claude-code-mods
 /plugin install assumption-tracker --marketplace aravindsriraj/claude-code-mods
+/plugin install idea-shelf --marketplace aravindsriraj/claude-code-mods
 ```
 
 The first time, Claude Code asks whether to add the marketplace (`github:aravindsriraj/claude-code-mods`): answer `y`. Then choose a scope; the user scope is listed first, and Enter picks it. The mod starts working in that session right away, and with the user scope in every session after.
@@ -69,6 +71,22 @@ Good to know:
 - A `/clear` starts the list over.
 - In the mobile app there is no Correction field: Right and Wrong only.
 
+## idea-shelf
+
+Park a side-idea without derailing what Claude is doing, and send it later.
+
+| Command | What it does |
+| --- | --- |
+| `/idea <text>` | Puts the idea on the shelf with a timestamp. Runs at once, even while Claude is working, and shows a 💡 toast. |
+| `/ideas` | Opens the shelf in a side pane, numbered, with a **Send** button per idea. Press its number (or click Send) to run it. Esc closes. |
+| `/idea-send <n>` | Sends idea n as a prompt and takes it off the shelf. |
+
+A sent idea is submitted as your own prompt (the transcript labels it "Prompt from the idea-shelf plugin"). If Claude is busy it waits its turn.
+
+Claude never sees a shelved idea. The mod replaces the text of your `/idea` command with `[shelved for later; hidden from Claude]` before it reaches the conversation, so Claude only learns that something was shelved. `/ideas` draws the list in a pane, outside the conversation. Your typed text does stay in your local prompt history (up-arrow) and in the session file's record of the command, neither of which Claude reads.
+
+The shelf lives in `~/.claude/idea-shelf.md`, one idea per line (`- [2026-10-09 14:32] your idea`), shared by every project and session. You can edit it by hand.
+
 ## Development
 
 Each mod is a folder with `.claude-plugin/plugin.json`, `hooks/hooks.json` and the hooks module `hooks/register.tsx`; `.claude-plugin/marketplace.json` at the root lists them all.
@@ -81,6 +99,8 @@ claude plugin validate ./design-picker
 claude plugin test ./design-picker
 claude plugin validate ./assumption-tracker
 claude plugin test ./assumption-tracker
+claude plugin validate ./idea-shelf
+claude plugin test ./idea-shelf
 ```
 
 To try a change, start a session with the mod loaded from your working copy: `claude --plugin-dir ./prompt-enhancer`. Claude Code then writes the API's type declarations into `.claude-plugin/types/` and a `tsconfig.json` beside them, so `tsc -p ./prompt-enhancer` type-checks it; both are gitignored.
