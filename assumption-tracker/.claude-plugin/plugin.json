@@ -1,0 +1,10 @@
+{
+  "name": "assumption-tracker",
+  "version": "0.1.0",
+  "description": "Claude records each assumption it makes; review them in a side pane, mark them right or wrong, and the verdicts go back to Claude.",
+  "author": {
+    "name": "TR Aravindan",
+    "url": "https://github.com/aravindsriraj"
+  },
+  "types": "./types/index.d.ts"
+}

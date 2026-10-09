@@ -1,6 +1,6 @@
 {
   "name": "claude-code-mods",
-  "description": "Claude Code mods: a prompt enhancer and a visual design-direction picker.",
+  "description": "Claude Code mods: a prompt enhancer, a visual design-direction picker, and an assumption tracker.",
   "owner": {
     "name": "TR Aravindan",
     "url": "https://github.com/aravindsriraj"
@@ -15,6 +15,11 @@
       "name": "design-picker",
       "source": "./design-picker",
       "description": "Draws design-direction questions from AskUserQuestion as visual mockups to pick from; other questions untouched."
+    },
+    {
+      "name": "assumption-tracker",
+      "source": "./assumption-tracker",
+      "description": "Claude records each assumption it makes; review them in a side pane, mark them right or wrong, and the verdicts go back to Claude."
     }
   ]
 }
