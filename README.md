@@ -81,11 +81,22 @@ Park a side-idea without derailing what Claude is doing, and send it later.
 | `/ideas` | Opens the shelf in a side pane, numbered, with a **Send** button per idea. Press its number (or click Send) to run it. Esc closes. |
 | `/idea-send <n>` | Sends idea n as a prompt and takes it off the shelf. |
 
-A sent idea is submitted as your own prompt (the transcript labels it "Prompt from the idea-shelf plugin"). If Claude is busy it waits its turn.
+A sent idea is submitted as your own prompt (the transcript labels it "Prompt from the idea-shelf plugin"). If Claude is busy it waits its turn. If the send is refused (by a hook, say), the idea goes back where it was on the shelf and a toast says why.
 
-Claude never sees a shelved idea. The mod replaces the text of your `/idea` command with `[shelved for later; hidden from Claude]` before it reaches the conversation, so Claude only learns that something was shelved. `/ideas` draws the list in a pane, outside the conversation. Your typed text does stay in your local prompt history (up-arrow) and in the session file's record of the command, neither of which Claude reads.
+An idea that starts with `/` or `!` would run a command or a shell line, so it is never submitted for you: it goes into your prompt box instead, and runs only if you press Enter.
 
-The shelf lives in `~/.claude/idea-shelf.md`, one idea per line (`- [2026-10-09 14:32] your idea`), shared by every project and session. You can edit it by hand.
+### What Claude can see
+
+Your idea's text is kept out of the conversation. The mod passes your `/idea` command on with its text replaced by `[shelved for later; hidden from Claude]`, so Claude only learns that something was shelved, and `/ideas` draws the list in a pane outside the conversation. With Claude Code 2.1.308, the session file's records of the command (the queue entry and the command record) and your prompt history (up-arrow) get the placeholder too. Older versions can still write the text there.
+
+Limits:
+
+- The shelf is a plain file. Claude can't see it on its own, but its file tools can open `~/.claude/idea-shelf.md` if you ask, as with any file.
+- A sent idea is an ordinary prompt from then on: it's in the conversation like anything you type.
+
+### Where it lives
+
+The shelf lives in `~/.claude/idea-shelf.md`, one idea per line (`- [2026-10-09 14:32] your idea`), shared by every project and session. The mod keeps it readable by you alone (`chmod 600`, as Claude Code does for `settings.json`; not on Windows). You can edit it by hand: control characters and escape sequences are stripped when an idea is shelved and when the file is read. If `HOME` isn't set, `/idea` refuses rather than writing somewhere else.
 
 ## Development
 
